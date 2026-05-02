@@ -1,0 +1,1065 @@
+/* ==========================================================================
+   COURTNEY RAY'S PEANUT BRITTLE — Brand System v2026
+   Pulled from new package renderings: Peanut, Pecan, Bacon Pecan,
+   Hatch Chile Pecan, Freeze Dried Peanut, Freeze Dried Pecan
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Lobster&family=Pacifico&family=Bagel+Fat+One&family=DM+Sans:wght@400;500;700&family=Inter:wght@400;500;600;700;800&display=swap');
+
+:root {
+  /* ----- Universal brand tokens ----- */
+  --ink: #2A1810;            /* deep brittle-brown text */
+  --ink-soft: #5C3D2E;
+  --cream: #F4ECDA;          /* freeze-dried package bg */
+  --cream-deep: #EBDFC4;
+  --bone: #FAF4E6;
+  --paper: #FFF9EC;
+
+  --hot-pink: #E5286F;       /* primary — script title color */
+  --hot-pink-deep: #C81356;
+  --hot-pink-soft: #F5C7CC;  /* peanut bag bg */
+  --orange: #F58A2B;         /* stripes + freeze-dried callout */
+  --orange-soft: #F9B262;
+  --yellow: #FCE56C;         /* bacon pecan bg */
+  --yellow-deep: #F4D339;
+  --purple: #6E4691;         /* pecan + hatch script color */
+  --purple-deep: #4A2D6B;
+  --purple-soft: #C9B7DC;    /* pecan + hatch bag bg */
+  --lavender: #DCCDE6;
+
+  /* ----- Type ----- */
+  --font-script: 'Lobster', 'Pacifico', cursive;
+  --font-cursive: 'Pacifico', cursive;
+  --font-display: 'Bagel Fat One', 'Lobster', sans-serif;
+  --font-body: 'DM Sans', 'Inter', system-ui, sans-serif;
+  --font-ui: 'Inter', system-ui, sans-serif;
+
+  /* ----- Layout ----- */
+  --rad-sm: 8px;
+  --rad-md: 16px;
+  --rad-lg: 28px;
+  --rad-xl: 48px;
+  --rad-pill: 999px;
+
+  --shadow-sm: 0 2px 8px rgba(42, 24, 16, 0.08);
+  --shadow-md: 0 8px 24px rgba(42, 24, 16, 0.12);
+  --shadow-lg: 0 20px 60px rgba(42, 24, 16, 0.18);
+
+  --wrap: clamp(24px, 4vw, 64px);
+  --max-w: 1280px;
+}
+
+/* ----- Per-flavor palettes (apply class to <body> or <section>) ----- */
+.flavor-peanut {
+  --flav-bg: var(--hot-pink-soft);
+  --flav-script: var(--hot-pink);
+  --flav-stripe-a: var(--orange);
+  --flav-stripe-b: var(--yellow);
+  --flav-starburst: var(--hot-pink);
+  --flav-pill-border: var(--hot-pink);
+  --flav-tagline: "sweet n' salty";
+}
+.flavor-pecan {
+  --flav-bg: var(--purple-soft);
+  --flav-script: var(--purple);
+  --flav-stripe-a: var(--hot-pink);
+  --flav-stripe-b: var(--purple);
+  --flav-starburst: var(--purple);
+  --flav-pill-border: var(--purple);
+  --flav-tagline: "sweet n' salty";
+}
+.flavor-bacon {
+  --flav-bg: var(--yellow);
+  --flav-script: var(--hot-pink);
+  --flav-stripe-a: var(--hot-pink);
+  --flav-stripe-b: var(--hot-pink-soft);
+  --flav-starburst: var(--hot-pink);
+  --flav-pill-border: var(--hot-pink);
+  --flav-tagline: "sweet & smoky";
+}
+.flavor-hatch {
+  --flav-bg: var(--lavender);
+  --flav-script: var(--purple);
+  --flav-stripe-a: var(--orange);
+  --flav-stripe-b: var(--yellow);
+  --flav-starburst: var(--hot-pink);
+  --flav-pill-border: var(--purple);
+  --flav-tagline: "sweet n' spicy";
+}
+.flavor-fd-peanut {
+  --flav-bg: var(--cream);
+  --flav-script: var(--hot-pink);
+  --flav-callout: var(--orange);
+  --flav-stripe-a: var(--hot-pink);
+  --flav-stripe-b: var(--purple);
+  --flav-starburst: var(--hot-pink);
+  --flav-pill-border: var(--hot-pink);
+  --flav-tagline: "crispy & nutty";
+}
+.flavor-fd-pecan {
+  --flav-bg: var(--cream);
+  --flav-script: var(--purple);
+  --flav-callout: var(--orange);
+  --flav-stripe-a: var(--hot-pink);
+  --flav-stripe-b: var(--purple);
+  --flav-starburst: var(--hot-pink);
+  --flav-pill-border: var(--purple);
+  --flav-tagline: "crispy & nutty";
+}
+
+/* ==========================================================================
+   BASE
+   ========================================================================== */
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font-body);
+  color: var(--ink);
+  background: var(--cream);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; cursor: pointer; }
+
+h1, h2, h3, h4 { margin: 0; line-height: 1.05; letter-spacing: -0.01em; }
+
+/* ==========================================================================
+   STRIPED BORDER (signature element from packaging)
+   ========================================================================== */
+
+.stripe-border {
+  height: 22px;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--flav-stripe-a, var(--orange)) 0 14px,
+    var(--flav-stripe-b, var(--yellow)) 14px 28px
+  );
+}
+.stripe-border--thin {
+  height: 12px;
+}
+.stripe-border--diagonal {
+  background: repeating-linear-gradient(
+    -10deg,
+    var(--flav-stripe-a, var(--orange)) 0 14px,
+    var(--flav-stripe-b, var(--yellow)) 14px 28px
+  );
+}
+
+/* ==========================================================================
+   ANNOUNCEMENT BAR
+   ========================================================================== */
+
+.announce {
+  background: var(--ink);
+  color: var(--cream);
+  font-family: var(--font-ui);
+  font-size: 13px;
+  text-align: center;
+  padding: 10px var(--wrap);
+  letter-spacing: 0.04em;
+}
+.announce strong { color: var(--orange-soft); }
+
+/* ==========================================================================
+   NAV
+   ========================================================================== */
+
+.nav {
+  background: var(--cream);
+  padding: 18px var(--wrap);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  border-bottom: 1px solid rgba(42, 24, 16, 0.06);
+}
+
+.nav__logo {
+  font-family: var(--font-cursive);
+  font-size: 28px;
+  color: var(--hot-pink);
+  letter-spacing: -0.02em;
+}
+
+.nav__links {
+  display: flex;
+  gap: 34px;
+  font-family: var(--font-ui);
+  font-weight: 500;
+  font-size: 15px;
+  letter-spacing: 0.02em;
+}
+.nav__links a:hover { color: var(--hot-pink); }
+
+.nav__actions {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+
+.nav__cart {
+  background: var(--ink);
+  color: var(--cream);
+  border: none;
+  padding: 11px 22px;
+  border-radius: var(--rad-pill);
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.02em;
+}
+.nav__cart:hover { background: var(--hot-pink); }
+
+@media (max-width: 820px) {
+  .nav__links { display: none; }
+}
+
+/* ==========================================================================
+   HERO
+   ========================================================================== */
+
+.hero {
+  position: relative;
+  background: var(--hot-pink-soft);
+  padding: 72px var(--wrap) 96px;
+  overflow: hidden;
+}
+.hero__inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+@media (max-width: 900px) {
+  .hero__inner { grid-template-columns: 1fr; gap: 32px; }
+}
+
+.hero__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--cream);
+  color: var(--ink);
+  padding: 8px 18px;
+  border-radius: var(--rad-pill);
+  font-family: var(--font-ui);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 22px;
+}
+.hero__eyebrow::before {
+  content: "✦";
+  color: var(--hot-pink);
+  font-size: 16px;
+}
+
+.hero__title {
+  font-family: var(--font-script);
+  font-size: clamp(58px, 9vw, 124px);
+  color: var(--hot-pink);
+  line-height: 0.92;
+  margin: 0 0 24px;
+  letter-spacing: -0.01em;
+}
+.hero__title .courtney {
+  display: block;
+  font-family: var(--font-cursive);
+  font-size: 0.32em;
+  color: var(--ink);
+  margin-bottom: 6px;
+  letter-spacing: 0;
+}
+
+.hero__sub {
+  font-size: 19px;
+  color: var(--ink);
+  max-width: 480px;
+  margin: 0 0 32px;
+  line-height: 1.5;
+}
+
+.hero__ctas { display: flex; gap: 14px; flex-wrap: wrap; }
+
+/* ==========================================================================
+   BUTTONS
+   ========================================================================== */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 16px 32px;
+  border-radius: var(--rad-pill);
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.02em;
+  border: 2px solid transparent;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+.btn:hover { transform: translateY(-2px); }
+.btn--primary {
+  background: var(--ink);
+  color: var(--cream);
+}
+.btn--primary:hover { background: var(--hot-pink); }
+.btn--pink {
+  background: var(--hot-pink);
+  color: var(--cream);
+}
+.btn--pink:hover { background: var(--hot-pink-deep); }
+.btn--ghost {
+  background: transparent;
+  color: var(--ink);
+  border-color: var(--ink);
+}
+.btn--ghost:hover { background: var(--ink); color: var(--cream); }
+.btn--lg { padding: 20px 40px; font-size: 16px; }
+
+/* ==========================================================================
+   PILLS (diet callouts — match packaging exactly)
+   ========================================================================== */
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 7px 16px;
+  border-radius: var(--rad-pill);
+  background: var(--cream);
+  border: 2px solid var(--flav-pill-border, var(--hot-pink));
+  color: var(--flav-pill-border, var(--hot-pink));
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.pill--orange { border-color: var(--orange); color: var(--orange); }
+.pill--solid { background: var(--flav-pill-border, var(--hot-pink)); color: var(--cream); }
+
+/* ==========================================================================
+   STARBURST BADGE (signature flavor tagline element)
+   ========================================================================== */
+
+.starburst {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  width: 110px;
+  height: 110px;
+  background: var(--flav-starburst, var(--hot-pink));
+  clip-path: polygon(
+    50% 0%, 60% 18%, 78% 8%, 78% 30%, 100% 30%, 84% 50%,
+    100% 70%, 78% 70%, 78% 92%, 60% 82%, 50% 100%,
+    40% 82%, 22% 92%, 22% 70%, 0% 70%, 16% 50%,
+    0% 30%, 22% 30%, 22% 8%, 40% 18%
+  );
+  color: var(--cream);
+  font-family: var(--font-cursive);
+  font-size: 17px;
+  text-align: center;
+  line-height: 1;
+  transform: rotate(-12deg);
+}
+.starburst--lg { width: 150px; height: 150px; font-size: 22px; }
+.starburst--sm { width: 76px; height: 76px; font-size: 13px; }
+
+/* ==========================================================================
+   DIAGONAL BANNER (handmade · small batch ribbon from packaging)
+   ========================================================================== */
+
+.ribbon {
+  display: inline-block;
+  background: var(--cream);
+  color: var(--ink);
+  padding: 6px 16px;
+  font-family: var(--font-ui);
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transform: rotate(-3deg);
+}
+
+/* ==========================================================================
+   SECTION SHELL
+   ========================================================================== */
+
+.section { padding: 96px var(--wrap); }
+.section--tight { padding: 64px var(--wrap); }
+.section__head { max-width: var(--max-w); margin: 0 auto 56px; text-align: center; }
+.section__inner { max-width: var(--max-w); margin: 0 auto; }
+
+.eyebrow {
+  display: inline-block;
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--hot-pink);
+  margin-bottom: 16px;
+}
+.h-display {
+  font-family: var(--font-script);
+  font-size: clamp(44px, 6vw, 84px);
+  color: var(--ink);
+  line-height: 0.95;
+}
+.h-display--pink { color: var(--hot-pink); }
+.h-display--purple { color: var(--purple); }
+.h-display--cream { color: var(--cream); }
+
+.lede {
+  font-size: 18px;
+  color: var(--ink-soft);
+  max-width: 620px;
+  margin: 22px auto 0;
+}
+
+/* ==========================================================================
+   FLAVOR SHELF (homepage product blocks)
+   ========================================================================== */
+
+.flavor-shelf {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+@media (max-width: 900px) {
+  .flavor-shelf { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .flavor-shelf { grid-template-columns: 1fr; }
+}
+
+.flavor-card {
+  position: relative;
+  background: var(--flav-bg);
+  border-radius: var(--rad-lg);
+  padding: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease;
+}
+.flavor-card:hover { transform: translateY(-4px); }
+
+.flavor-card__media {
+  aspect-ratio: 1 / 1;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+}
+.flavor-card__media img { max-height: 100%; width: auto; }
+
+.flavor-card__body {
+  background: var(--cream);
+  padding: 22px 22px 24px;
+  border-top: 4px solid var(--flav-script);
+}
+.flavor-card__name {
+  font-family: var(--font-script);
+  font-size: 32px;
+  color: var(--flav-script);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.flavor-card__tagline {
+  font-family: var(--font-cursive);
+  font-size: 16px;
+  color: var(--flav-starburst);
+  margin-bottom: 10px;
+}
+.flavor-card__meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 12px;
+}
+.flavor-card__price {
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--ink);
+}
+.flavor-card__cta {
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--flav-script);
+}
+
+.flavor-card__starburst {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 2;
+}
+
+/* Striped top border on flavor card */
+.flavor-card::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 14px;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--flav-stripe-a) 0 10px,
+    var(--flav-stripe-b) 10px 20px
+  );
+  z-index: 3;
+}
+
+/* ==========================================================================
+   TRUST / RETAIL LOGO STRIP
+   ========================================================================== */
+
+.trust {
+  background: var(--ink);
+  color: var(--cream);
+  padding: 36px var(--wrap);
+}
+.trust__inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 56px;
+  flex-wrap: wrap;
+}
+.trust__label {
+  font-family: var(--font-ui);
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--orange-soft);
+  margin-right: 8px;
+}
+.trust__logo {
+  font-family: var(--font-display);
+  font-size: 18px;
+  color: var(--cream);
+  letter-spacing: 0.04em;
+  opacity: 0.85;
+}
+
+/* ==========================================================================
+   TIKTOK WALL
+   ========================================================================== */
+
+.tiktok-wall {
+  background: var(--ink);
+  color: var(--cream);
+  padding: 96px var(--wrap);
+  position: relative;
+  overflow: hidden;
+}
+.tiktok-wall .h-display { color: var(--cream); }
+.tiktok-wall .eyebrow { color: var(--orange-soft); }
+
+.tiktok-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 14px;
+  max-width: var(--max-w);
+  margin: 48px auto 0;
+}
+@media (max-width: 900px) {
+  .tiktok-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 600px) {
+  .tiktok-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+.tiktok-card {
+  aspect-ratio: 9 / 16;
+  background: linear-gradient(135deg, var(--hot-pink), var(--purple));
+  border-radius: var(--rad-md);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  padding: 14px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--cream);
+}
+.tiktok-card::after {
+  content: "▶";
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: rgba(0,0,0,0.5);
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 10px;
+}
+.tiktok-card--1 { background: linear-gradient(135deg, var(--hot-pink), var(--orange)); }
+.tiktok-card--2 { background: linear-gradient(135deg, var(--purple), var(--hot-pink)); }
+.tiktok-card--3 { background: linear-gradient(135deg, var(--yellow), var(--orange)); color: var(--ink); }
+.tiktok-card--4 { background: linear-gradient(135deg, var(--purple-soft), var(--purple)); }
+.tiktok-card--5 { background: linear-gradient(135deg, var(--hot-pink-soft), var(--hot-pink)); }
+
+/* ==========================================================================
+   REVIEWS / "BRITTLE BELIEVERS"
+   ========================================================================== */
+
+.reviews { background: var(--cream); padding: 96px var(--wrap); }
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  max-width: var(--max-w);
+  margin: 0 auto;
+}
+@media (max-width: 800px) { .reviews-grid { grid-template-columns: 1fr; } }
+
+.review-card {
+  background: var(--paper);
+  border: 2px solid var(--ink);
+  border-radius: var(--rad-lg);
+  padding: 28px;
+  position: relative;
+}
+.review-card__stars {
+  color: var(--hot-pink);
+  font-size: 18px;
+  letter-spacing: 2px;
+  margin-bottom: 12px;
+}
+.review-card__quote {
+  font-family: var(--font-script);
+  font-size: 22px;
+  line-height: 1.15;
+  color: var(--ink);
+  margin-bottom: 16px;
+}
+.review-card__name {
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--ink);
+}
+.review-card__meta {
+  font-family: var(--font-ui);
+  font-size: 12px;
+  color: var(--ink-soft);
+  margin-top: 2px;
+}
+
+/* ==========================================================================
+   BUNDLE / SUBSCRIBE PROMO
+   ========================================================================== */
+
+.promo-card {
+  position: relative;
+  background: var(--ink);
+  color: var(--cream);
+  border-radius: var(--rad-xl);
+  padding: 64px;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 40px;
+  align-items: center;
+  overflow: hidden;
+}
+@media (max-width: 800px) {
+  .promo-card { grid-template-columns: 1fr; padding: 40px; }
+}
+.promo-card__title {
+  font-family: var(--font-script);
+  font-size: clamp(40px, 5vw, 64px);
+  color: var(--orange-soft);
+  line-height: 1;
+  margin-bottom: 16px;
+}
+.promo-card__subline {
+  font-size: 17px;
+  margin-bottom: 24px;
+  opacity: 0.92;
+}
+
+/* ==========================================================================
+   FOOTER
+   ========================================================================== */
+
+footer {
+  background: var(--ink);
+  color: var(--cream);
+  padding: 64px var(--wrap) 32px;
+}
+footer .footer-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 40px;
+}
+@media (max-width: 800px) {
+  footer .footer-inner { grid-template-columns: 1fr 1fr; }
+}
+.footer-brand {
+  font-family: var(--font-cursive);
+  font-size: 36px;
+  color: var(--hot-pink);
+  margin-bottom: 12px;
+}
+.footer-col h5 {
+  font-family: var(--font-ui);
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--orange-soft);
+  margin: 0 0 14px;
+}
+.footer-col ul { list-style: none; padding: 0; margin: 0; }
+.footer-col ul li { margin-bottom: 8px; font-size: 14px; opacity: 0.9; }
+.footer-col ul li:hover { opacity: 1; color: var(--orange-soft); }
+
+.footer-bottom {
+  max-width: var(--max-w);
+  margin: 48px auto 0;
+  padding-top: 24px;
+  border-top: 1px solid rgba(244, 236, 218, 0.15);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  opacity: 0.7;
+}
+
+/* ==========================================================================
+   PDP — product detail page
+   ========================================================================== */
+
+.pdp {
+  background: var(--flav-bg);
+  padding: 48px var(--wrap) 96px;
+  position: relative;
+}
+.pdp__inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 64px;
+}
+@media (max-width: 900px) {
+  .pdp__inner { grid-template-columns: 1fr; gap: 32px; }
+}
+
+.pdp__media {
+  position: relative;
+  background: var(--cream);
+  border-radius: var(--rad-xl);
+  padding: 48px;
+  display: grid;
+  place-items: center;
+  min-height: 540px;
+}
+.pdp__media img { max-height: 460px; width: auto; }
+
+.pdp__media .starburst {
+  position: absolute;
+  top: 28px;
+  right: 28px;
+}
+
+.pdp__title {
+  font-family: var(--font-script);
+  font-size: clamp(48px, 7vw, 88px);
+  color: var(--flav-script);
+  line-height: 0.92;
+  margin-bottom: 8px;
+}
+.pdp__title .courtney {
+  display: block;
+  font-family: var(--font-cursive);
+  font-size: 0.3em;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+.pdp__pills { display: flex; gap: 8px; flex-wrap: wrap; margin: 18px 0 24px; }
+
+.pdp__price {
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 28px;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+.pdp__price-small { font-size: 14px; color: var(--ink-soft); font-weight: 500; }
+
+.pdp__desc {
+  font-size: 18px;
+  color: var(--ink);
+  line-height: 1.55;
+  margin: 24px 0;
+}
+
+.pdp__sizes {
+  display: flex;
+  gap: 12px;
+  margin: 24px 0;
+}
+.pdp__size {
+  flex: 1;
+  border: 2px solid var(--ink);
+  background: transparent;
+  border-radius: var(--rad-md);
+  padding: 16px;
+  font-family: var(--font-ui);
+  font-weight: 600;
+  text-align: center;
+  cursor: pointer;
+}
+.pdp__size.is-active {
+  background: var(--ink);
+  color: var(--cream);
+}
+
+.pdp__qty-add {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.pdp__qty {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--cream);
+  border: 2px solid var(--ink);
+  border-radius: var(--rad-pill);
+  padding: 8px 18px;
+  font-weight: 700;
+}
+.pdp__qty button {
+  background: none;
+  border: none;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--ink);
+}
+.pdp__add {
+  flex: 1;
+  background: var(--ink);
+  color: var(--cream);
+  border: none;
+  padding: 18px 32px;
+  border-radius: var(--rad-pill);
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: 0.04em;
+}
+.pdp__add:hover { background: var(--hot-pink); }
+
+.pdp__sub {
+  background: var(--cream);
+  border: 2px dashed var(--ink);
+  border-radius: var(--rad-md);
+  padding: 14px 18px;
+  font-size: 13px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 500;
+}
+.pdp__sub strong { color: var(--hot-pink); }
+
+/* PDP — sensory description block */
+.sense-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  max-width: var(--max-w);
+  margin: 0 auto;
+}
+@media (max-width: 700px) { .sense-grid { grid-template-columns: 1fr; } }
+
+.sense-card {
+  background: var(--cream);
+  border-radius: var(--rad-lg);
+  padding: 32px;
+  border: 2px solid var(--ink);
+}
+.sense-card__icon {
+  font-size: 32px;
+  margin-bottom: 12px;
+}
+.sense-card__title {
+  font-family: var(--font-script);
+  font-size: 28px;
+  color: var(--hot-pink);
+  margin-bottom: 8px;
+}
+
+/* PDP — FAQ */
+.faq { max-width: 780px; margin: 0 auto; }
+.faq__item {
+  border-bottom: 1px solid rgba(42,24,16,0.15);
+  padding: 24px 0;
+}
+.faq__q {
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--ink);
+  margin-bottom: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.faq__a {
+  font-size: 16px;
+  color: var(--ink-soft);
+  line-height: 1.6;
+}
+
+/* ==========================================================================
+   COLLECTION GRID
+   ========================================================================== */
+
+.collection-hero {
+  background: var(--hot-pink-soft);
+  padding: 80px var(--wrap) 120px;
+  text-align: center;
+}
+.collection-grid {
+  max-width: var(--max-w);
+  margin: -64px auto 0;
+  padding: 0 var(--wrap) 96px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+@media (max-width: 900px) { .collection-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px) { .collection-grid { grid-template-columns: 1fr; } }
+
+.filter-bar {
+  max-width: var(--max-w);
+  margin: 0 auto 48px;
+  padding: 0 var(--wrap);
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.filter-pill {
+  background: var(--cream);
+  border: 2px solid var(--ink);
+  padding: 10px 22px;
+  border-radius: var(--rad-pill);
+  font-family: var(--font-ui);
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+}
+.filter-pill.is-active { background: var(--ink); color: var(--cream); }
+
+/* ==========================================================================
+   ABOUT
+   ========================================================================== */
+
+.about-hero {
+  background: var(--purple-soft);
+  padding: 96px var(--wrap);
+  text-align: center;
+}
+.about-content {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 80px var(--wrap);
+  font-size: 19px;
+  line-height: 1.7;
+  color: var(--ink);
+}
+.about-content p { margin-bottom: 24px; }
+.about-content .pull {
+  font-family: var(--font-script);
+  font-size: 36px;
+  color: var(--hot-pink);
+  line-height: 1.1;
+  text-align: center;
+  margin: 56px 0;
+}
+
+/* ==========================================================================
+   BUNDLE / GIFT
+   ========================================================================== */
+
+.bundle-card {
+  background: var(--cream);
+  border: 3px solid var(--ink);
+  border-radius: var(--rad-xl);
+  padding: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+.bundle-card__media {
+  aspect-ratio: 4 / 3;
+  background: var(--flav-bg, var(--hot-pink-soft));
+  padding: 32px;
+  display: grid;
+  place-items: center;
+}
+.bundle-card__body { padding: 28px; }
+.bundle-card__title {
+  font-family: var(--font-script);
+  font-size: 36px;
+  color: var(--hot-pink);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+.bundle-card__save {
+  display: inline-block;
+  background: var(--yellow);
+  color: var(--ink);
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 12px;
+  padding: 4px 12px;
+  border-radius: var(--rad-pill);
+  margin-bottom: 12px;
+  letter-spacing: 0.06em;
+}
+
+/* ==========================================================================
+   UTIL
+   ========================================================================== */
+
+.text-center { text-align: center; }
+.mt-sm { margin-top: 16px; }
+.mt-md { margin-top: 32px; }
+.mt-lg { margin-top: 64px; }
+
+.divider {
+  height: 22px;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--orange) 0 14px,
+    var(--yellow) 14px 28px
+  );
+}

@@ -1,0 +1,15 @@
+{
+  "name": "courtney-rays-mockups",
+  "version": "1.0.0",
+  "description": "Courtney Ray's Peanut Brittle redesign mockups",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.21.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
